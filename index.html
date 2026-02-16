@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新年快乐！</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #02161f, #0e1d698e, #01141dc4);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            font-family: 'Arial Rounded MT Bold', 'Microsoft YaHei', sans-serif;
+        }
+
+        /* 舞台容器 */
+        .stage {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+        }
+
+        /* Q版小人容器 */
+        .characters {
+            position: absolute;
+            bottom: 100px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        /* Q版小人 - 可以用图片替换 */
+        .character {
+            width: 80px;
+            height: 120px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(100px);
+            animation: popUp 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+
+        /* 头部
+        .head {
+            width: 80px;
+            height: 80px;
+            background: #ff9999;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            overflow: hidden;
+            border: 3px solid #ff6666;
+        }
+
+         眼睛 
+        .eye {
+            width: 16px;
+            height: 16px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            top: 25px;
+        }
+
+        .eye.left {
+            left: 20px;
+        }
+
+        .eye.right {
+            right: 20px;
+        }
+
+        腮红 
+        .blush {
+            width: 20px;
+            height: 10px;
+            background: #ff9999;
+            border-radius: 50%;
+            position: absolute;
+            top: 45px;
+            opacity: 0.6;
+        }
+
+        .blush.left {
+            left: 10px;
+        }
+
+        .blush.right {
+            right: 10px;
+        }
+
+        身体
+        .body {
+            width: 70px;
+            height: 60px;
+            background: #66aaff;
+            position: absolute;
+            top: 70px;
+            left: 5px;
+            border-radius: 40% 40% 20px 20px;
+            border: 3px solid #3388ff;
+        }
+
+        手 
+        .hand {
+            width: 25px;
+            height: 20px;
+            background: #ff9999;
+            position: absolute;
+            top: 75px;
+            border-radius: 10px;
+        }
+
+        .hand.left {
+            left: -15px;
+            transform: rotate(30deg);
+        }
+
+        .hand.right {
+            right: -15px;
+            transform: rotate(-30deg);
+        }
+
+        逐个出现动画 
+        .character:nth-child(1) {
+            animation-delay: 0.5s;
+        }
+
+        .character:nth-child(2) {
+            animation-delay: 1s;
+        }
+
+        .character:nth-child(3) {
+            animation-delay: 1.5s;
+        }
+
+        .character:nth-child(4) {
+            animation-delay: 2s;
+        }
+
+        .character:nth-child(5) {
+            animation-delay: 2.5s;
+        }
+
+        @keyframes popUp {
+            0% {
+                opacity: 0;
+                transform: translateY(100px) scale(0.3);
+            }
+
+            70% {
+                transform: translateY(-20px) scale(1.1);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        } */
+
+        /* 新年快乐文字 */
+        .new-year-text {
+            position: absolute;
+            top: 3%;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            font-size: 8rem;
+            color: #fcf7d2;
+            text-shadow:
+                0 0 10px #968181,
+                0 0 20px #fcc88c,
+                0 0 30px #dda6a6,
+                0 0 40px #ff0000;
+            animation: textPop 1s 3s forwards;
+            z-index: 10;
+            font-family: 'STXingkai', 'Xingkai SC', cursive;
+        }
+
+        @keyframes textPop {
+            0% {
+                transform: translateX(-50%) scale(0);
+            }
+
+            50% {
+                transform: translateX(-50%) scale(1.2);
+            }
+
+            100% {
+                transform: translateX(-50%) scale(1);
+            }
+        }
+
+        /* 烟花画布 */
+        .fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        /* 信封区域 */
+        /* .envelope-section {
+            position: absolute;
+            bottom: 300px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: fadeIn 1s 6s forwards;
+            z-index: 20;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .click-hint {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.7;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* 信封样式 */
+        /*.envelope {
+            width: 120px;
+            height: 80px;
+            background: #f2b9b9;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            border-radius: 8px 8px 0 0;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .envelope:before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 60px solid transparent;
+            border-right: 60px solid transparent;
+            border-bottom: 40px solid #ff8e8e;
+        }
+
+        .envelope:after {
+            content: '💌';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+        } */
+
+
+        /* ===== 信的内容弹出层 ===== */
+
+        /* 信的内容（初始隐藏） */
+        .letter-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            z-index: 9999;
+            opacity: 0;
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            pointer-events: none;
+        }
+
+        /* 信内容显示状态 */
+        .letter-popup.show {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* 信纸样式 */
+        .letter-box {
+            width: 400px;
+            background: #fff9e6;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border: 2px solid #ffd700;
+            position: relative;
+            animation: letterAppear 0.5s ease-out;
+        }
+
+        @keyframes letterAppear {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .letter-box h3 {
+            text-align: center;
+            color: #ff6b6b;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            font-family: 'ZCOOL KuaiLe', cursive;
+        }
+
+        .letter-box p {
+            color: #333;
+            line-height: 1.8;
+            font-size: 1.2rem;
+            text-align: justify;
+            margin-bottom: 15px;
+        }
+
+        /* 关闭按钮 */
+        .close-btn {
+            display: block;
+            margin: 20px auto 0;
+            padding: 10px 30px;
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #ffd700;
+        }
+
+        .close-btn:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #ff5252, #ff7575);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        /* 背景遮罩 */
+        .letter-popup::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .letter-popup.show::before {
+            opacity: 1;
+        }
+
+        /* 信封内容 */
+        .letter {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%) scaleY(0);
+            width: 280px;
+            background: #fff9e6;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transform-origin: bottom center;
+            z-index: -1;
+            opacity: 0;
+        }
+
+        .letter-content {
+            color: #333;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        .letter-content h3 {
+            text-align: center;
+            color: #ff6b6b;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        /* 信封展开状态 */
+        .envelope.open {
+            transform: translateY(-150px);
+        }
+
+        .envelope.open+.letter {
+            transform: translateX(-50%) scaleY(1);
+            opacity: 1;
+        }
+
+        /* ===== 手绘小人样式 - 方法一：绝对定位 ===== */
+
+        /* 左侧的手绘小人 */
+        .character-left {
+            position: fixed;
+            left: calc(50% - 750px);
+            width: 1000px;
+            height: 1000px;
+            bottom: -150px;
+            isolation: isolate;
+            z-index: 11;
+            opacity: 0;
+            animation: popUpLeft 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 1.0s forwards;
+        }
+
+        .character-left .character-body {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 -5px 10px rgba(0, 0, 0, 0.3));
+            z-index: 1;
+            /* 身体轻微呼吸效果 */
+            animation: breathe 3s ease-in-out infinite 1.0s;
+        }
+
+        /* 左侧小人手部覆盖层 */
+        .character-hand-overlay {
+            position: fixed;
+            left: calc(50% - 750px);
+            bottom: -150px;
+            width: 1000px;
+            height: 1000px;
+            z-index: 15;
+            pointer-events: none;
+            opacity: 0;
+            /* 与身体同时出现 */
+            animation: popUpLeft 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 1.0s forwards;
+        }
+
+        .character-hand-overlay .character-hand {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.4));
+            /* 手部摇摆动画 */
+            animation: handWave 3s ease-in-out infinite;
+        }
+
+        /* 中间的手绘小人 */
+        .character-center {
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            transform-origin: center bottom;
+            width: 1000px;
+            height: 1000px;
+            bottom: -350px;
+            z-index: 12;
+            opacity: 0;
+            animation: popUpCenter 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s forwards;
+        }
+
+
+        /* ===== 右侧手绘小人（带琴） ===== */
+
+        /* 右侧小人容器 */
+        .character-right {
+            position: fixed;
+            left: calc(50% + 40px);
+            /* 从中间向右移动600px */
+            width: 1000px;
+            /* 比中间小人小一点 */
+            height: 1000px;
+            bottom: -250px;
+            /* 调整高度 */
+            isolation: isolate;
+            z-index: 10;
+            /* 比中间小人(12)高，但比左侧手(15)低 */
+            opacity: 0;
+            animation: popUpRight 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 1.5s forwards;
+        }
+
+        /* 右侧小人身体 */
+        .character-right .character-body {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 -5px 10px rgba(0, 0, 0, 0.3));
+            z-index: 1;
+            /* 身体在容器内低层 */
+            animation: breathe 3s ease-in-out infinite 1.5s;
+        }
+
+        /* 琴的图层 */
+        /* .character-right .character-guitar {
+    position: absolute;
+    top: 20%; 
+    left: -30%; 
+    width: 120%; 
+    height: auto;
+    object-fit: contain;
+    z-index: 3;  琴在容器内最高层 
+    filter: drop-shadow(3px 3px 8px rgba(0, 0, 0, 0.5));
+    
+    /* 琴的轻微动画 */
+        /* animation: guitarFloat 4s ease-in-out infinite 1.5s;
+}   */
+
+        /* 琴的浮动动画 */
+        /* @keyframes guitarFloat {
+    0%, 100% { 
+        transform: translateY(0) rotate(0deg);
+    }
+    25% { 
+        transform: translateY(-5px) rotate(1deg);
+    }
+    75% { 
+        transform: translateY(5px) rotate(-1deg);
+    }
+} */
+
+        /* 右侧小人出现动画 */
+        @keyframes popUpRight {
+            0% {
+                opacity: 0;
+                transform: translateY(100px) scale(0.3);
+            }
+
+            70% {
+                transform: translateY(-15px) scale(1.05);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* ===== 第四个小人（在第三个小人身体上方、琴下方） ===== */
+
+        /* 第四个小人容器 */
+        .character-fourth {
+            position: fixed;
+            left: calc(50% + 120px);
+            /* 在右侧小人稍微右边一点 */
+            width: 1000px;
+            /* 较小 */
+            height: 1000px;
+            bottom: -200px;
+            /* 较高 */
+            isolation: isolate;
+            z-index: 14;
+            /* 关键：在右侧小人身体和琴之间 */
+            opacity: 0;
+            animation: popUpFourth 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 2.0s forwards;
+        }
+
+        /* 第四个小人身体 */
+        .character-fourth .character-body {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 -5px 10px rgba(0, 0, 0, 0.3));
+            z-index: 1;
+            animation: bounce 2s ease-in-out infinite 2.0s;
+        }
+
+        /* 第四个小人弹跳动画 */
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* 第四个小人出现动画 */
+        @keyframes popUpFourth {
+            0% {
+                opacity: 0;
+                transform: translateY(100px) scale(0.3);
+            }
+
+            70% {
+                transform: translateY(-20px) scale(1.1);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* 图片通用样式 */
+        .custom-character .character-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 -5px 10px rgba(0, 0, 0, 0.3));
+            /* 中间小人也有呼吸效果 */
+            animation: breathe 3s ease-in-out infinite 0.5s;
+        }
+
+        /* 呼吸动画（所有小人共用） */
+        @keyframes breathe {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        /* 手部摇摆动画 */
+        @keyframes handWave {
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(-2deg);
+            }
+
+            75% {
+                transform: rotate(2deg);
+            }
+        }
+
+        /* 调整现有层级关系 */
+        .character-left {
+            z-index: 11;
+            /* 左侧小人身体 */
+        }
+
+        .character-center {
+            z-index: 12;
+            /* 中间小人 */
+        }
+
+        .character-right {
+            z-index: 13;
+            /* 右侧小人容器 */
+        }
+
+        .character-fourth {
+            z-index: 14;
+            /* 第四个小人（在右侧小人身体和琴之间） */
+        }
+
+        .character-hand-overlay {
+            z-index: 15;
+            /* 左侧小人的手（最高） */
+        }
+
+        /* 右侧小人内部的层级 */
+        .character-right .character-body {
+            z-index: 1;
+            /* 身体层 */
+        }
+
+        .character-right .character-guitar {
+            z-index: 3;
+            /* 琴层（最高） */
+        }
+
+        /* 第四个小人在z-index 14，所以在右侧小人身体(z-index 13容器内的1)上方，
+   但在右侧小人的琴(z-index 13容器内的3)下方 */
+
+        /* 中间小人的动画效果 */
+        @keyframes popUpCenter {
+            0% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(100px) scale(0.3);
+            }
+
+            70% {
+                transform: translateX(-50%) translateY(-20px) scale(1.1);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0) scale(1);
+            }
+        }
+
+        /* 左侧小人的动画效果 */
+        @keyframes popUpLeft {
+            0% {
+                opacity: 0;
+                transform: translateY(100px) scale(0.3);
+            }
+
+            70% {
+                transform: translateY(-15px) scale(1.05);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* ===== 最左侧手绘小人 ===== */
+
+        /* 最左侧小人容器 */
+        .character-farleft {
+            position: fixed;
+            left: calc(50% - 480px);
+            /* 从中间向左移动1200px，比左侧小人更左 */
+            width: 1200px;
+            /* 可以根据图片大小调整 */
+            height: 1200px;
+            bottom: -300px;
+            /* 调整高度，部分被遮挡 */
+            isolation: isolate;
+            z-index: 10;
+            /* 比左侧小人(11)低一层，增加层次感 */
+            opacity: 0;
+            animation: popUpFarLeft 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.2s forwards;
+            /* 第一个出现 */
+        }
+
+        /* 最左侧小人身体 */
+        .character-farleft .character-body {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 -5px 10px rgba(0, 0, 0, 0.3));
+            z-index: 1;
+            /* 添加独特的动画效果 */
+            animation: farLeftFloat 3.5s ease-in-out infinite 0.2s;
+        }
+
+        /* 最左侧小人的出现动画 */
+        @keyframes popUpFarLeft {
+            0% {
+                opacity: 0;
+                transform: translateY(100px) scale(0.3);
+            }
+
+            70% {
+                transform: translateY(-20px) scale(1.1);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* 最左侧小人的浮动动画（独特效果） */
+        @keyframes farLeftFloat {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(-2deg);
+            }
+
+            50% {
+                transform: translateY(-12px) rotate(2deg);
+            }
+        }
+
+        /* ===== 最左侧手绘小人（第六个） ===== */
+
+        /* 最左侧小人容器（第六个） */
+        .character-farleft-last {
+            position: fixed;
+            left: calc(50% - 1400px);
+            /* 从中间向左移动1400px，比第五个小人更左 */
+            width: 1400px;
+            /* 可以根据图片大小调整 */
+            height: 1400px;
+            bottom: -450px;
+            /* 调整高度，部分被遮挡 */
+            isolation: isolate;
+            z-index: 9;
+            /* 比第五个小人(10)低一层，增加层次感 */
+            opacity: 0;
+            animation: popUpFarLeftLast 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 2.5s forwards;
+            /* 第六个出现（最晚） */
+        }
+
+        /* 最左侧小人身体（第六个） */
+        .character-farleft-last .character-body {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 -5px 10px rgba(0, 0, 0, 0.3));
+            z-index: 1;
+            /* 添加独特的动画效果 */
+            animation: breathe 3s ease-in-out infinite;
+        }
+
+        /* 最左侧小人的出现动画（第六个） */
+        @keyframes popUpFarLeftLast {
+            0% {
+                opacity: 0;
+                transform: translateY(100px) scale(0.3);
+            }
+
+            70% {
+                transform: translateY(-20px) scale(1.1);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* 最左侧小人的浮动动画（独特效果） */
+        /* @keyframes farLeftLastFloat {
+    0%, 100% { 
+        transform: translateY(0) rotate(-1deg);
+    }
+    25% { 
+        transform: translateY(-8px) rotate(2deg);
+    }
+    75% { 
+        transform: translateY(-4px) rotate(-3deg);
+    }
+} */
+
+
+        /* ===== 中间小人第二形态 ===== */
+
+        /* 第二形态容器 - 初始隐藏 */
+        /* .character-center-second {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%) scale(0); 初始缩放为0，不可见 
+    transform-origin: center bottom;
+    
+    width: 1500px; /* 比第一形态大20% 
+    height: 1500px;
+    bottom: -450px; /* 因为变大了，需要调整底部位置 
+    
+    z-index: 16; /* 比第一形态高，确保覆盖 
+    opacity: 0;
+    pointer-events: none; /* 不干扰点击 
+    
+    /* 过渡效果 
+    transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* 第二形态显示状态 
+.character-center-second.show {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+}
+
+/* 第二形态图片 
+.character-center-second .character-img-second {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 -5px 20px rgba(250, 251, 241, 0.466)); /* 金色发光 */
+
+        /* 呼吸动画 - 可以稍微不同步 
+    animation: breatheSecond 3.5s ease-in-out infinite;
+}
+
+/* 第二形态呼吸动画 
+@keyframes breatheSecond {
+    0%, 100% { 
+        transform: translateY(0) scale(1);
+    }
+    50% { 
+        transform: translateY(-12px) scale(1.02);
+    }
+}
+
+/* 第一形态淡出效果 
+.character-center.fade-out {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.8);
+    transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    pointer-events: none;
+}
+
+/* 调整第一形态的层级，让第二形态在上面 
+.character-center {
+    z-index: 12;
+}
+
+.character-center-second {
+    z-index: 16; /* 确保在顶部 
+}
+ */
+
+        /* ===== 中间小人第二形态（可点击） ===== */
+
+        /* 第二形态容器 - 初始隐藏 */
+        .character-center-second {
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            transform-origin: center bottom;
+
+            width: 1500px;
+            height: 1500px;
+            bottom: -450px;
+
+            z-index: 16;
+            opacity: 0;
+            pointer-events: none;
+            /* 初始不可点击 */
+
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        /* 第二形态显示状态 - 可点击 */
+        .character-center-second.show {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+            pointer-events: auto;
+            /* 显示后可点击 */
+            cursor: pointer;
+            /* 鼠标变成手型 */
+        }
+
+        /* 悬停效果 */
+        .character-center-second.show:hover {
+            filter: brightness(1.05);
+            transition: filter 0.3s ease;
+        }
+
+        /* 第二形态图片 */
+        .character-center-second .character-img-second {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 -5px 20px rgba(250, 251, 241, 0.466));
+            animation: breatheSecond 3.5s ease-in-out infinite;
+            transition: transform 0.3s ease;
+        }
+
+        /* 点击时的效果 */
+        .character-center-second.show:active .character-img-second {
+            transform: scale(0.98);
+        }
+
+        /* 第二形态呼吸动画 */
+        @keyframes breatheSecond {
+
+            0%,
+            100% {
+                transform: translateY(0) scale(1);
+            }
+
+            50% {
+                transform: translateY(-12px) scale(1.02);
+            }
+        }
+
+
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .characters {
+                gap: 20px;
+            }
+
+            .character {
+                width: 60px;
+                height: 90px;
+            }
+
+            .head {
+                width: 60px;
+                height: 60px;
+            }
+
+            .body {
+                width: 50px;
+                height: 45px;
+                top: 55px;
+            }
+
+            .new-year-text {
+                font-size: 2.5rem;
+            }
+
+            .letter {
+                width: 90vw;
+            }
+
+            /* 手机端调整手绘小人 */
+            .character-center {
+                width: 160px;
+                height: 160px;
+                bottom: -50px;
+            }
+
+            .character-left {
+                width: 140px;
+                height: 140px;
+                left: calc(50% - 130px);
+                /* 手机屏偏移少一点 */
+                bottom: -45px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stage">
+        <!-- 烟花画布 -->
+        <canvas class="fireworks" id="fireworks"></canvas>
+
+        <!-- 新年快乐文字 -->
+        <div class="new-year-text">新年快乐！</div>
+
+        <!-- 手绘小人们（独立于.characters容器） -->
+        <div class="character-left custom-character">
+            <img src="images/xue2.png" alt="第二个手绘小人" class="character-body">
+        </div>
+
+        <!-- 中间小人 -->
+        <div class="character-center custom-character">
+            <img src="images/su.png" alt="我的手绘小人" class="character-img">
+        </div>
+
+        <!-- 中间小人第二形态（新加） -->
+        <div class="character-center-second custom-character">
+            <img src="images/xin-su.png" alt="中间小人第二形态" class="character-img-second">
+        </div>
+
+        <!-- 左侧小人手部（单独放在最外层） -->
+        <div class="character-hand-overlay">
+            <img src="images/hand.png" alt="手部" class="character-hand">
+        </div>
+
+        <!-- 在现有的手绘小人结构后添加 -->
+
+        <!-- 右侧手绘小人（带琴） -->
+        <div class="character-right custom-character">
+            <!-- 身体部分 -->
+            <img src="images/gong.png" alt="第三个手绘小人身体" class="character-body">
+
+            <!-- 琴的图层（最高层） -->
+            <!-- <img src="images/qin.png" alt="琴" class="character-guitar"> -->
+        </div>
+
+        <!-- 第四个小人（在右侧小人和琴之间） -->
+        <div class="character-fourth custom-character">
+            <img src="images/fang.png" alt="第四个手绘小人" class="character-body">
+        </div>
+
+        <!-- 在现有HTML中，添加在最前面 -->
+
+        <!-- 最左侧手绘小人（第五个） -->
+        <div class="character-farleft custom-character">
+            <img src="images/ling.png" alt="第五个手绘小人" class="character-body">
+        </div>
+
+        <div class="character-farleft-last custom-character">
+            <img src="images/lan.png" alt="第六个手绘小人" class="character-body">
+        </div>
+
+
+
+        <!-- 信的内容弹出层 -->
+        <div class="letter-popup">
+            <div class="letter-box">
+                <h3>亲爱的鸮</h3>
+                <p>很高兴在过去的一年认识鸮！喜欢你的画，喜欢你的空间，也喜欢和你聊天😊这个滑铲的小网页很粗糙，希望你不要嫌弃呀。</p>
+                <p>新的一年祝鸮生活学习顺利，享受大学生活不受身边人的影响，还有画技大进步！❤</p>
+                <p style="text-align: right; margin-top: 20px;">🎉 新年快乐，万事如意！ 🎉</p>
+                <p style="text-align: right; margin-top: 20px;">--来自不会画画但喜欢你的小春</p>
+                <button class="close-btn">收起 ✨</button>
+            </div>
+        </div>
+
+        <!-- 原来的CSS绘制小人们 -->
+        <!-- <div class="characters">
+             重复多个小人 -->
+        <!-- <div class="character">
+                <div class="head" style="background: #ffcc66; border-color: #ffaa33;">
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="blush left"></div>
+                    <div class="blush right"></div>
+                </div>
+                <div class="body" style="background: #66cc99; border-color: #33aa77;"></div>
+                <div class="hand left"></div>
+                <div class="hand right"></div>
+            </div>
+            <div class="character">
+                <div class="head" style="background: #99ccff; border-color: #6699ff;">
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="blush left"></div>
+                    <div class="blush right"></div>
+                </div>
+                <div class="body" style="background: #ff99cc; border-color: #ff6699;"></div>
+                <div class="hand left"></div>
+                <div class="hand right"></div>
+            </div>
+            <div class="character">
+                <div class="head" style="background: #cc99ff; border-color: #9966ff;">
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="blush left"></div>
+                    <div class="blush right"></div>
+                </div>
+                <div class="body" style="background: #ffcc66; border-color: #ffaa33;"></div>
+                <div class="hand left"></div>
+                <div class="hand right"></div>
+            </div>
+            <div class="character">
+                <div class="head" style="background: #66cccc; border-color: #33aaaa;">
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="blush left"></div>
+                    <div class="blush right"></div>
+                </div>
+                <div class="body" style="background: #ff9999; border-color: #ff6666;"></div>
+                <div class="hand left"></div>
+                <div class="hand right"></div>
+            </div>
+        </div> --> -->
+
+        <!-- 信封区域
+        <div class="envelope-section">
+            <div class="click-hint">点击信封开启祝福 ✨</div>
+            <div class="envelope"></div>
+            <div class="letter">
+                <div class="letter-content">
+                    <h3>致亲爱的朋友</h3>
+                    <p>新的一年，愿你的生活如烟花般绚烂多彩！愿每一个梦想都能绽放，每一份努力都有回报。</p>
+                    <p>愿健康与你相伴，快乐与你同行，成功与你相随。在这充满希望的一年里，愿你收获满满的爱与幸福！</p>
+                    <p style="text-align: right; margin-top: 20px;">🎉 新年快乐，万事如意！ 🎉</p>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+        <script>
+            // 烟花效果
+            class Fireworks {
+                constructor(canvas) {
+                    this.canvas = canvas;
+                    this.ctx = canvas.getContext('2d');
+                    this.particles = [];
+                    this.resize();
+                    window.addEventListener('resize', () => this.resize());
+                }
+
+                resize() {
+                    this.canvas.width = window.innerWidth;
+                    this.canvas.height = window.innerHeight;
+                }
+
+                createFirework(x, y) {
+                    const colors = ['#ff0000', '#ff8800', '#ffff00', '#00ff00', '#0088ff', '#8800ff'];
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+
+                    for (let i = 0; i < 150; i++) {
+                        const angle = Math.random() * Math.PI * 2;
+                        const speed = Math.random() * 5 + 2;
+                        const vx = Math.cos(angle) * speed;
+                        const vy = Math.sin(angle) * speed;
+                        const size = Math.random() * 3 + 1;
+
+                        this.particles.push({
+                            x, y,
+                            vx, vy,
+                            color,
+                            size,
+                            alpha: 1,
+                            decay: Math.random() * 0.02 + 0.01
+                        });
+                    }
+                }
+
+                update() {
+                    for (let i = this.particles.length - 1; i >= 0; i--) {
+                        const p = this.particles[i];
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        p.vy += 0.05; // 重力
+                        p.alpha -= p.decay;
+
+                        if (p.alpha <= 0) {
+                            this.particles.splice(i, 1);
+                        }
+                    }
+                }
+
+                draw() {
+                    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+                    for (const p of this.particles) {
+                        this.ctx.save();
+                        this.ctx.globalAlpha = p.alpha;
+                        this.ctx.fillStyle = p.color;
+                        this.ctx.beginPath();
+                        this.ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                        this.ctx.fill();
+                        this.ctx.restore();
+                    }
+                }
+
+                animate() {
+                    this.update();
+                    this.draw();
+                    requestAnimationFrame(() => this.animate());
+                }
+
+                // startShow() {
+                //     // 3秒后开始放烟花
+                //     setTimeout(() => {
+                //         const interval = setInterval(() => {
+                //             const x = Math.random() * this.canvas.width;
+                //             const y = Math.random() * this.canvas.height * 0.5;
+                //             this.createFirework(x, y);
+                //         }, 300);
+
+                //         // 放10秒烟花
+                //         setTimeout(() => clearInterval(interval), 10000);
+                //     }, 3000);
+                // }
+
+                startShow() {
+                    // 3秒后开始放烟花，持续播放
+                    setTimeout(() => {
+                        // 每隔300毫秒放一个烟花
+                        setInterval(() => {
+                            const x = Math.random() * this.canvas.width;
+                            const y = Math.random() * this.canvas.height * 0.5;
+                            this.createFirework(x, y);
+                        }, 300); // 300毫秒 = 0.3秒
+                    }, 3000);
+                }
+            }
+
+            // 页面加载完成后初始化
+            document.addEventListener('DOMContentLoaded', () => {
+                // 初始化烟花
+                const fireworks = new Fireworks(document.getElementById('fireworks'));
+                fireworks.animate();
+                fireworks.startShow();
+
+
+                // === 新增：15秒后切换中间小人第二形态 ===
+                setTimeout(() => {
+                    const firstForm = document.querySelector('.character-center');
+                    const secondForm = document.querySelector('.character-center-second');
+
+                    if (firstForm && secondForm) {
+                        // 第一形态淡出
+                        firstForm.classList.add('fade-out');
+
+                        // 稍微延迟一点显示第二形态，创造层次感
+                        setTimeout(() => {
+                            secondForm.classList.add('show');
+
+                            // // 可选：添加一个微小的闪光效果
+                            // secondForm.style.filter = 'brightness(1.2)';
+                            // setTimeout(() => {
+                            //     secondForm.style.filter = 'brightness(1)';
+                            // }, 300);
+                        }, 0);
+                        // // 15秒后完全隐藏第一形态（可选）
+                        setTimeout(() => {
+                            firstForm.style.display = 'none';
+                        }, 200);
+                    }
+                }, 6000); // 15000毫秒 = 15秒
+
+
+
+                // 信封点击事件
+                // const envelope = document.querySelector('.envelope');
+                // const letter = document.querySelector('.letter');
+
+                // envelope.addEventListener('click', function () {
+                //     this.classList.toggle('open');
+
+                //     if (this.classList.contains('open')) {
+                //         document.querySelector('.click-hint').textContent = '点击信封收起 ✨';
+                //     } else {
+                //         document.querySelector('.click-hint').textContent = '点击信封开启祝福 ✨';
+                //     }
+                // });
+
+                // // 3秒后显示信封提示
+                // setTimeout(() => {
+                //     document.querySelector('.envelope-section').style.opacity = '1';
+                // }, 6000);
+
+                // === 信弹出层事件 ===
+                const secondForm = document.querySelector('.character-center-second');
+                const letterPopup = document.querySelector('.letter-popup');
+                const closeBtn = document.querySelector('.close-btn');
+
+                if (secondForm && letterPopup && closeBtn) {
+                    // 点击第二形态小人打开信
+                    secondForm.addEventListener('click', () => {
+                        if (secondForm.classList.contains('show')) {
+                            letterPopup.classList.add('show');
+
+                            // 添加点击反馈
+                            secondForm.style.transform = 'translateX(-50%) scale(0.98)';
+                            setTimeout(() => {
+                                secondForm.style.transform = '';
+                            }, 200);
+                        }
+                    });
+
+                    // 点击关闭按钮
+                    closeBtn.addEventListener('click', () => {
+                        letterPopup.classList.remove('show');
+                    });
+
+                    // 点击背景遮罩关闭
+                    letterPopup.addEventListener('click', (e) => {
+                        if (e.target === letterPopup) {
+                            letterPopup.classList.remove('show');
+                        }
+                    });
+                }
+            });
+        </script>
+</body>
+
+</html>
